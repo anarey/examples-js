@@ -1,16 +1,12 @@
+var exec = require("child_process").exec;
+
 function iniciar() {
   console.log("Manipulador de petición 'iniciar' ha sido llamado.");
-
-  function sleep(milliSeconds) {
-    // obten la hora actual
-    var startTime = new Date().getTime();
-    // atasca la cpu
-    while (new Date().getTime() < startTime + milliSeconds);
-  }
-
-  sleep(10000);
-
-  return "Hola Iniciar";
+  var content = "empty";
+  exec("ls -lah", function(error, stdout, sterr) {
+     content = stdout;
+  });
+  return content;
 }
 
 function subir() {
