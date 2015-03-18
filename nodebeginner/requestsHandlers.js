@@ -1,17 +1,20 @@
 var exec = require("child_process").exec;
 
-function iniciar() {
+function iniciar(response) {
   console.log("Manipulador de petición 'iniciar' ha sido llamado.");
-  var content = "empty";
+
   exec("ls -lah", function(error, stdout, sterr) {
-     content = stdout;
+     response.writeHead(200, {"Content-Type": "text/html"});
+     response.write(stdout);
+     response.end();
   });
-  return content;
 }
 
-function subir() {
+function subir(response) {
   console.log("Manipulador de petición 'subir' ha sido llamado.");
-  return "Hola subir";
+  response.writeHead(200, {"Content-Type": "text/html"});
+  response.write("Hola Subir");
+  response.end();
 }
 
 exports.iniciar = iniciar;
